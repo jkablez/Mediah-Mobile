@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mediah.MainPage">
+
+    <StackLayout>
+        <Frame BackgroundColor="Black">
+            <Label Text="Mediah" TextColor="White" FontSize="Title"/>
+        </Frame>
+        <StackLayout Padding="10" Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Fill">
+                <Label Text="Latest Files" FontSize="Title" Padding="0,0,0,10" VerticalOptions="Center" VerticalTextAlignment="Center" TextColor="White"/>
+                <Button x:Name="SearchButton" Clicked="SearchButton_Clicked" Text="Search" Grid.Column="1" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <ListView x:Name="FileList" IsPullToRefreshEnabled="True" Refreshing="FileList_Refreshing" CachingStrategy="RecycleElement" IsRefreshing="{Binding IsBusy, Mode=OneWay}" ItemSelected="FileList_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Filename}" FontSize="Body" TextColor="White" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Parts.Count, StringFormat='Number of parts {0}'}" />
+                                    <Label Grid.Column="1" Text="{Binding Timestamp}" HorizontalOptions="End"/>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal">
+                <Button HorizontalOptions="FillAndExpand" Text="Refresh" x:Name="RefreshList" CornerRadius="100" Clicked="RefreshList_Clicked"/>
+                <Button Text="Previous" x:Name="PreviousPage" Clicked="PreviousPage_Clicked" CornerRadius="100"/>
+                <Button Text="Next" x:Name="NextPage" Clicked="NextPage_Clicked" CornerRadius="100"/>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

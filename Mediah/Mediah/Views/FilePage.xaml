@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mediah.Views.Separate">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Frame BackgroundColor="Black">
+                <Label Text="Mediah - Downloader" TextColor="White" FontSize="Title"/>
+            </Frame>
+            <StackLayout Padding="20" Orientation="Vertical">
+                <Label Text="{Binding Filename}" FontSize="Title" TextColor="White"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Timestamp}" FontSize="Body"/>
+                    <Label Text="•" FontSize="Body"/>
+                    <Label Text="{Binding UploadedSize}" FontSize="Body"/>
+                </StackLayout>
+                <Label Text="{Binding Parts.Count, StringFormat='Parts ({0})'}" Padding="0,10,0,10" FontSize="Body" TextColor="White" />
+                <ListView x:Name="FileParts" ItemSelected="FileParts_ItemSelected" ItemsSource="{Binding Parts}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label VerticalTextAlignment="Center" VerticalOptions="Center" Text="{Binding Size}" FontSize="Body" TextColor="White" />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Button HorizontalOptions="FillAndExpand" CornerRadius="100" Text="Download" Grid.Column="0" x:Name="DownloadButton" Clicked="DownloadButton_Clicked"/>
+                    <Button HorizontalOptions="FillAndExpand" CornerRadius="100" Text="Back" Grid.Column="1" x:Name="BackButton" Clicked="BackButton_Clicked"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
